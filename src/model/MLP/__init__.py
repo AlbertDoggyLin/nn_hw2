@@ -50,7 +50,7 @@ class MLP:
         adjustedData:np.ndarray = (data-self._lowerBound)/(self._upperBound-self._lowerBound)
         return adjustedData[:, 0:-1], adjustedData[:, -1:]
 
-    def fit(self, X: np.ndarray, Y: np.ndarray, epoches: int = 1000, lr: float = 0.01):
+    def fit(self, X: np.ndarray, Y: np.ndarray, epoches: int = 1000, lr: float = 0.8):
         X, Y = X, Y
         def setBound(X:Union[np.ndarray, np.ndarray[Any, np.ndarray[Any, float]]], Y:Union[np.ndarray, np.ndarray[Any, np.ndarray[Any, float]]]):
             data = np.hstack((X, Y))
@@ -60,11 +60,10 @@ class MLP:
         X, Y = self._adjustData(X, Y)
         n=X.shape[0]
         print(f'loss before training: {self.loss(X, Y, normalized=True)}')
-        for i in range(epoches*50):
-            if (20*i+20)%n<20:continue
-            Yhat = self.predict(X[(20*i)%n:(20*i+20)%n], normalized=True)
-            self.kickback(Y[(20*i)%n:(20*i+20)%n], Yhat, lr)
-            if not i%5000:
+        for i in range(epoches):
+            Yhat = self.predict(X, normalized=True)
+            self.kickback(Y, Yhat, lr)
+            if not i%1000:
                 self.pt()
                 print(f'loss after {i} epoches: {self.loss(X, Y, normalized=True)}')
     

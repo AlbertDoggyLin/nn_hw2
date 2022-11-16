@@ -14,7 +14,7 @@ def runDataOnMLP(track: list[str], dataset: list[str]):
         X.append(np.concatenate((tmp[0:-3], tmp[-3:]-6)))
     y = dataset[:, -1:]
     X = np.array(X)
-    model = MLP(X.shape[1])
+    model = MLP(X.shape[1], layers=4)
     trainX, testX, trainy, testy = train_test_split(
         X, y, test_size=0.3, random_state=42)
     model.fit(trainX, trainy, epoches=100000)

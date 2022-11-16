@@ -12,6 +12,6 @@ if __name__=="__main__":
     # dataset=readData('resource/train6DAll.txt')
     # runDataOnRBFN(track, dataset)
     print('hello exe file')
-    app=App(readData, runDataOnRBFN)
-    #app=App(readData, runDataOnMLP)
+    # app=App(readData, runDataOnRBFN)
+    app=App(readData, runDataOnMLP)
     app.startAppSync()
