@@ -10,8 +10,6 @@ class Layer:
         self._lastOut:np.ndarray[Any, np.ndarray[Any, float]]
         self._lastDeltaW:np.ndarray[Any, np.ndarray[Any, float]]=np.zeros(self._w.shape)
         self._lastDeltaTheta:float=0
-        print('layerSetup, mids:')
-        print(mids)
 
 
     def cal(self, input:np.ndarray[Any, np.ndarray[Any, float]], first=False):

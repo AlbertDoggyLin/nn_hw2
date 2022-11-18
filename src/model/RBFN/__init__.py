@@ -1,7 +1,7 @@
 from typing import Union, Callable, Any
 import numpy as np
 from model.RBFN.RBFNLayer import Layer
-
+from tqdm import tqdm
 class RBFN:
     def __init__(self, neuCount: int = 2):
         self._neuCount:int=neuCount
@@ -73,13 +73,14 @@ class RBFN:
         X, Y = self._adjustData(X, Y)
         self.setBases(X, Y)
         self.predict(X, normalized=True, first=True)
-        print(f'loss before training: {self.loss(X, Y, normalized=True)}')
-        for i in range(epoches):
+        currentLoss=self.loss(X, Y, normalized=True)
+        pbar:tqdm=tqdm(range(epoches),total=epoches, desc="training progress", postfix={'current loss':currentLoss}, ncols=90)
+        for i in pbar:
             Yhat = self.predict(X, normalized=True)
             self.kickback(Y, Yhat, lr)
             if not i%500:
-                #self.pt()
-                print(f'loss after {i} epoches: {self.loss(X, Y, normalized=True)}')
+                currentLoss=self.loss(X, Y, normalized=True)
+                pbar.set_postfix({'current loss':f'{currentLoss:.3f}'})
     
     def pt(self):
         print()

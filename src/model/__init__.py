@@ -18,8 +18,6 @@ def runDataOnMLP(track: list[str], dataset: list[str]):
     trainX, testX, trainy, testy = train_test_split(
         X, y, test_size=0.3, random_state=42)
     model.fit(trainX, trainy, epoches=100000)
-    for i in list(zip(X, y)):
-        print(i[0], model.predict(i[0]), i[1])
     print(f'loss for test dataset:{model.loss(testX, testy)}')
     return model
 
@@ -38,7 +36,5 @@ def runDataOnRBFN(track: list[str], dataset: list[str]):
     trainX, testX, trainy, testy = train_test_split(
         X, y, test_size=0.3, random_state=42)
     model.fit(trainX, trainy, epoches=10000)
-    for i in list(zip(X, y))[0:100]:
-        print(i[0], model.predict(np.array([i[0]]), first=True), i[1])
     print(f'loss for test dataset:{model.loss(testX, testy)}')
     return model

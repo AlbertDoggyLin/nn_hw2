@@ -11,7 +11,18 @@ if __name__=="__main__":
     # track=readData('resource/track.txt')
     # dataset=readData('resource/train6DAll.txt')
     # runDataOnRBFN(track, dataset)
-    print('hello exe file')
-    # app=App(readData, runDataOnRBFN)
-    app=App(readData, runDataOnMLP)
+    import inquirer
+
+    questions = [
+        inquirer.List(
+            "model",
+            message="What model do you want to use when training data?",
+            choices=["MLP", "RBFN"],
+        ),
+    ]
+    answers = inquirer.prompt(questions)
+    if answers['model']=='RBFN':
+        app=App(readData, runDataOnRBFN)
+    else:
+        app=App(readData, runDataOnMLP)
     app.startAppSync()

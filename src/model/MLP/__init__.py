@@ -1,6 +1,7 @@
 from typing import Union, Any
 import numpy as np
 from model.MLP.MLPLayer import Layer
+from tqdm import tqdm
 
 class MLP:
     def __init__(self, inputDim: int, outputDim: int = 1, layers: int = 2):
@@ -59,13 +60,14 @@ class MLP:
         setBound(X, Y)
         X, Y = self._adjustData(X, Y)
         n=X.shape[0]
-        print(f'loss before training: {self.loss(X, Y, normalized=True)}')
-        for i in range(epoches):
+        currentLoss=self.loss(X, Y, normalized=True)
+        pbar:tqdm=tqdm(range(epoches),total=epoches, desc="training progress", postfix={'current loss':currentLoss}, ncols=90)
+        for i in pbar:
             Yhat = self.predict(X, normalized=True)
             self.kickback(Y, Yhat, lr)
-            if not i%1000:
-                self.pt()
-                print(f'loss after {i} epoches: {self.loss(X, Y, normalized=True)}')
+            if not i%500:
+                currentLoss=self.loss(X, Y, normalized=True)
+                pbar.set_postfix({'current loss':f'{currentLoss:.3f}'})
     
     def pt(self):
         print(self._inputLayer._w.transpose())
