@@ -2,9 +2,18 @@
 
 ## To run the project
 
-1. create a virtualenv (virtualenv env)
-2. install packages (pip install -r requirement.txt)
-3. run the main program (python src/main.py)
+1. clone the project
+2. create a virtualenv
+3. install packages
+4. run the main program
+
+git bash command as follow(if you have install python ofcourse lol):
+
+    git clone https://github.com/AlbertDoggyLin/nn_hw2
+    pip install virtualenv
+    virtualenv .
+    pip install -r requirement.txt
+    python src/main.py
 
 ## Introduction
 
