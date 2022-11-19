@@ -4,7 +4,7 @@ from model.RBFN import RBFN
 from sklearn.model_selection import train_test_split
 
 def runDataOnMLP(track: list[str], dataset: list[str]):
-    """track must be list seperated by comma, dataset must be seperated by space"""
+    """track must be list seperated by comma, dataset must be seperated by space """
     track = [list(map(lambda x:float(x), i.split(','))) for i in track]
     dataset: np.ndarray = np.array(
         [list(map(lambda x:float(x), i.split())) for i in dataset])
