@@ -3,3 +3,5 @@
 /share
 __pycache__
 *.cfg
+/test.py
+/resource/customData
