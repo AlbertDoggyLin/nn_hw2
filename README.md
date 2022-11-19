@@ -7,9 +7,10 @@
 3. install packages
 4. run the main program
 
-git bash command as follow(if you have install python ofcourse lol):
+git bash command as follow (if you have install python ofcourse lol):
 
     git clone https://github.com/AlbertDoggyLin/nn_hw2
+    cd nn_hw2
     pip install virtualenv
     virtualenv .
     source Scripts/activate
