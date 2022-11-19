@@ -12,8 +12,15 @@ git bash command as follow(if you have install python ofcourse lol):
     git clone https://github.com/AlbertDoggyLin/nn_hw2
     pip install virtualenv
     virtualenv .
+    source Scripts/activate
     pip install -r requirement.txt
     python src/main.py
+
+after first time running
+
+    source Scripts/activate
+    python src/main.py
+
 
 ## Introduction
 
