@@ -61,13 +61,18 @@ class MLP:
         X, Y = self._adjustData(X, Y)
         n=X.shape[0]
         currentLoss=self.loss(X, Y, normalized=True)
-        pbar:tqdm=tqdm(range(epoches),total=epoches, desc="training progress", postfix={'current loss':currentLoss}, ncols=90)
+        pbar:tqdm=tqdm(range(epoches),total=epoches, desc="training progress", postfix={'loss':f'{currentLoss:.6f}'}, ncols=90)
+        stepsize=X.shape[0]//20+1
+        XYcut=[(X[stepsize*i:stepsize*(i+1)], Y[stepsize*i:stepsize*(i+1)]) for i in range(X.shape[0]//stepsize+1)]
         for i in pbar:
             Yhat = self.predict(X, normalized=True)
             self.kickback(Y, Yhat, lr)
+            # for xcut, ycut in XYcut:
+            #     Yhat=self.predict(xcut, normalized=True)
+            #     self.kickback(ycut, Yhat, lr)
             if not i%500:
                 currentLoss=self.loss(X, Y, normalized=True)
-                pbar.set_postfix({'current loss':f'{currentLoss:.3f}'})
+                pbar.set_postfix({'loss':f'{currentLoss:.6f}'})
     
     def pt(self):
         print(self._inputLayer._w.transpose())

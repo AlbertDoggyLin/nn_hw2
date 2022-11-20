@@ -17,7 +17,7 @@ def runDataOnMLP(track: list[str], dataset: list[str]):
     model = MLP(X.shape[1], layers=4)
     trainX, testX, trainy, testy = train_test_split(
         X, y, test_size=0.3, random_state=42)
-    model.fit(trainX, trainy, epoches=100000)
+    model.fit(trainX, trainy, epoches=20000)
     print(f'loss for test dataset:{model.loss(testX, testy)}')
     return model
 
